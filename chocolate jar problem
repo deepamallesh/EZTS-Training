@@ -1,0 +1,21 @@
+j1,j2,j3,n=map(int,input().split())
+def fun(j):
+    a=0
+    b=0
+    c=0 
+    for i in range(0,j):
+        if(a<=b and a<=c):
+            a=a+1
+            i=i+1
+        elif(b<=a and b<=c):
+            b=b+1
+            i=i+1
+        elif(c<=a and c<=b):
+            c=c+1
+            i=i+1
+    return a
+    
+j=fun(j1)  
+k=fun(j2)
+l=fun(j3)
+print(j+k+l)
