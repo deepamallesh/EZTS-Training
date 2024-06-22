@@ -11,7 +11,7 @@ class Stack:
         return self.items[-1]
 
         
-L= [3,5,2,14,5,3,7,9,4,6,9,4,2,5,3]
+L= [3,5,2,14,5,3,7,9,4,6,9,4,2,5]
 O=[0]*len(L)
 s= Stack()
 for i in range(len(L)-1,-1,-1):
