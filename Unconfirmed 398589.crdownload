@@ -1,0 +1,421 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# '''3) Chocolate jar
+# You are given an integer array of size N, representing jars of chocolates. Three students A, B,
+# and C respectively, will pick chocolates one by one from each chocolate jar, till the jar is
+# empty, and then repeat the same with the rest of the jars. Your task is to fine and return an
+# integer value representing the total number of chocolates that student A will have, after all
+# the chocolates have been picked from all the jars.
+# Note: Once a jar is done A will start taking the chocolates from the new jar.
+# Input Format :
+# input1: An integer array representing the quantity of chocolates in each jar. input2: An
+# integer value N representing the number of jars.
+# Output Format:
+# Return an integer value representing the total number of chocolates that student A will
+# have, after all the chocolates are picked.
+# Example:
+# Input:
+# 10 20 30 3
+# Output:
+# 21
+# Explanation:
+# Jar 1: 10 chocolates -> A-4, B-3,C-3
+# Jar 2: 20 chocolates -> A-7, B-7, C-6 Jar 3: 30
+# chocolates -> A-10, B-10,C-10 so A gets a
+# total of 4+7+10=21 chocolates. '''
+
+# In[51]:
+
+
+j1,j2,j3,n=map(int,input().split())
+def fun(j):
+    a=0
+    b=0
+    c=0 
+    for i in range(0,j):
+        if(a<=b and a<=c):
+            a=a+1
+            i=i+1
+        elif(b<=a and b<=c):
+            b=b+1
+            i=i+1
+        elif(c<=a and c<=b):
+            c=c+1
+            i=i+1
+    return a
+    
+j=fun(j1)  
+k=fun(j2)
+l=fun(j3)
+print(j+k+l)
+
+
+# In[78]:
+
+
+# BFS by using Queueee(left view)
+class node:
+    def __init__(self,data):
+        self.value=data
+        self.left=None
+        self.right=None
+        
+def levelorder(root):
+    Q=[root]
+    Q.append(None)
+    print(root.value)
+    
+    while len(Q)>0:
+        curr=Q.pop(0)
+        if curr==None:
+            if len(Q)==0:
+                return
+            else:
+                print(Q[0].value)
+                Q.append(None)
+
+                
+        else: 
+            if curr.left !=None:
+                Q.append(curr.left)
+            if curr.left !=None:
+                Q.append(curr.right)
+                
+                
+                
+    
+if __name__=="__main__":
+    root = node(1)
+    
+    root.left=node(2)
+    root.right=node(3)
+    
+    root.left.left=node(4)
+    root.left.right=node(5)
+    
+    root.right.left=node(6)
+    root.right.right=node(7)
+    
+    levelorder(root)
+
+
+# In[79]:
+
+
+# BFS by using Queueee
+class node:
+    def __init__(self,data):
+        self.value=data
+        self.left=None
+        self.right=None
+        
+def levelorder(root):
+    Q=[root]
+    Q.append(None)
+    print(root.value)
+    
+    while len(Q)>0:
+        curr=Q.pop(0)
+        if curr==None:
+            if len(Q)==0:
+                return
+            else:
+                print(Q[-1].value)
+                Q.append(None)
+
+                
+        else: 
+            if curr.left !=None:
+                Q.append(curr.left)
+            if curr.left !=None:
+                Q.append(curr.right)
+                
+                
+                
+    
+if __name__=="__main__":
+    root = node(1)
+    
+    root.left=node(2)
+    root.right=node(3)
+    
+    root.left.left=node(4)
+    root.left.right=node(5)
+    
+    root.right.left=node(6)
+    root.right.right=node(7)
+    
+    levelorder(root)
+
+
+# In[42]:
+
+
+class node_data:
+    def __init__(self,node,Hkey):
+        self.node=node
+        self.Hkey=Hkey
+def topview(root):
+        temp=node_data(root,0)
+        Q=[temp]
+        Q.append(None)
+        Key_dict={}
+        while len(Q)!=0:
+            curr=Q.pop(0)
+            if curr==None:
+                if len(Q)==0:
+                    break
+                else:
+                    Q.append(None)
+            else:
+                if curr.Hkey not in Key_dict.keys():
+                    Key_dict[curr.Hkey]=curr.node.value
+                else:
+                    
+                if curr.node.left !=None:
+                    temp=node_data(curr.node.left,curr.Hkey-1)
+                    Q.append(temp)
+                if curr.node.right !=None:
+                    temp=node_data(curr.node.right,curr.Hkey+1)
+                    Q.append(temp)
+        return Key_dict
+Key_dict=topview(root)
+for i in sorted(Key_dict):
+        print(Key_dict[i])
+print(Key_dict)
+    
+
+
+# In[44]:
+
+
+class node_data:
+    def __init__(self,node,Hkey):
+        self.node=node
+        self.Hkey=Hkey
+def buttomview(root):
+        temp=node_data(root,0)
+        Q=[temp]
+        Q.append(None)
+        Key_dict={}
+        while len(Q)!=0:
+            curr=Q.pop(0)
+            if curr==None:
+                if len(Q)==0:
+                    break
+                else:
+                    Q.append(None)
+            else:
+                Key_dict[curr.Hkey]=curr.node.value
+                if curr.node.left !=None:
+                    temp=node_data(curr.node.left,curr.Hkey-1)
+                    Q.append(temp)
+                if curr.node.right !=None:
+                    temp=node_data(curr.node.right,curr.Hkey+1)
+                    Q.append(temp)
+        return Key_dict
+Key_dict=topview(root)
+for i in sorted(Key_dict):
+        print(Key_dict[i])
+print(Key_dict)
+    
+
+
+# In[6]:
+
+
+# BFS by using Queueee(left view)
+class node:
+    def __init__(self,data):
+        self.value=data
+        self.left=None
+        self.right=None
+        
+def levelorder(root):
+    pol=1
+    Q=[root]
+    Q.append(None)
+    print(root.value)
+    
+    while len(Q)>0:
+        curr=Q.pop(0)
+        if curr==None:
+            pol=0
+            if len(Q)==0:
+                return
+            else:
+                if(pol==0):
+                    ele=Q.pop()
+                    print(ele.value)
+                else:
+                    ele=Q.pop(0)
+                    print(ele.value)
+                Q.append(None)
+
+                
+        else: 
+            if curr.left !=None:
+                Q.append(curr.left)
+            if curr.left !=None:
+                Q.append(curr.right)
+                
+                
+                
+    
+if __name__=="__main__":
+    root = node(1)
+    
+    root.left=node(2)
+    root.right=node(3)
+    
+    root.left.left=node(4)
+    root.left.right=node(5)
+    
+    root.right.left=node(6)
+    root.right.right=node(7)
+    
+    levelorder(root)
+
+
+# ### graph 
+
+# ### adjency list and matrix in which we can store the graph
+
+# In[ ]:
+
+
+# Of a particular matrix ok. these are the three things we are going to store in our list. There are some also. It will be. like this. We have a list. And technically we have a list of lists of tuple. So list can have something 012. like this. I will for this particular situation. I can consider that in this. particular situation. I can consider that I numbers are actually the vertex. So I. can get the relation between the vertex number and the subgate of the list That is, by the way. Or you can simply store a list of the points. So I can simply have the list of stuff and tuples need start and then wave. So let us start from this particular point. Or if you want to stand for some other particular quality, you can fix your size. Where do you want the stabbings? What? Only. so the first list I can store is one, 2, zero. or one? that is that. one plus one. 3. Got 10. because G will complete all the children of month. Then we can go next. Next. Next is two or three. And here you can go to threeNext is two or three. And here you can go to three. So three formal. One is, zero. And now this shipment is in the center. Why we go back to one? Because it is undirected. We can go anywhere. OK. 6703. Cumber 5. Conference here. to come on. 10 commerce of income. 0. in this road. Please write all the lessons. Write down the list.
+
+
+# In[20]:
+
+
+dic={1:[(1,2,0),(1,3,0)],
+    2:[(2,1,0),(2,7,0)],
+    3:[(3,1,0),(3,6,0),(3,5,0)],
+    4:[(4,7,0),(4,8,0)],
+    5:[(5,3,0),(5,7,0)],
+    6:[(6,3,0),(6,8,0)],
+    7:[(7,2,0),(7,5,0),(7,4,0)],
+     8:[(8,4,0),(8,6,0)]}
+visted={
+    1:False,
+    2:False,
+    3:False,
+    4:False,
+    5:False,
+    6:False,
+    7:False,
+    8:False
+}
+def DFS(dic,visted,start,s):
+    if visted[start]==False:
+        s.append(start)
+        visted[start]=True
+    else:
+        return
+    for i in dic[start]:
+        DFS(dic,visted,i[1],s)
+    print(s.pop())
+s=[]
+start=1
+DFS(dic,visted,start,s)
+
+
+
+# In[27]:
+
+
+#BfS
+G={1:[(1,2,0),(1,3,0)],
+    2:[(2,1,0),(2,7,0)],
+    3:[(3,1,0),(3,6,0),(3,5,0)],
+    4:[(4,7,0),(4,8,0)],
+    5:[(5,3,0),(5,7,0)],
+    6:[(6,3,0),(6,8,0)],
+    7:[(7,2,0),(7,5,0),(7,4,0)],
+    8:[(8,4,0),(8,6,0)]}
+def BFS(G,e):
+    Q=[e]
+    V={}
+    for i in G.keys():
+        V[i]=False
+    V[e]=True
+    while len(Q)!=0:
+        curr=Q.pop(0)
+        print(curr)
+        for i in G[curr]:
+            if V[i[1]]==False:
+                    Q.append(i[1])
+                    V[i[1]]=True
+BFS(G,1)
+
+
+# In[60]:
+
+
+class node:
+    def __init__(self,data):
+        self.data=data
+        self.left=None
+        self.right=None
+        
+def BST(data,root):
+        if root==None:
+            return node(data)
+        if root.data<data:
+            root.right=BST(data,root.right)
+        if root.data>data:
+            root.left=BST(data,root.left)
+            
+        return root 
+def inoder(root):
+    if root:
+        inoder(root.left)
+        print(root.data)
+        inoder(root.right)
+        
+list1=[7,6,5,3,2,9,1]
+root=node(list1[0])
+for i in list1:
+    BST(i,root)
+inoder(root)
+        
+
+
+# In[54]:
+
+
+class node:
+    def __init__(self,value):
+        self.value = value 
+        self.right = None 
+        self.left = None
+
+
+def BST(value,root):
+    if root == None:
+        return node(value)
+        
+    if root.value<value:
+        root.right=BST(value,root.right)
+    if root.value > value:
+        root.left=BST(value,root.left)
+    
+    return root 
+
+def inorder(root):
+    if root:
+        inorder(root.left)
+        print(root.value)
+        inorder(root.right)
+        
+if __name__ == "__main__":
+    l = [4,6,7,3,8,2,5,9,1]
+    root = node(l[0])
+    for i in l:
+        BST(i,root)
+
+inorder(root)
+
