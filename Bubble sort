@@ -1,0 +1,8 @@
+#Bubble sort 
+n = [2,3,45,6,34]
+l = len(n)
+for i in range(0,l):
+    for j in range(0,l-1-i):
+        if n[j] > n[j+1]:
+            n[j],n[j+1] = n[j+1],n[j]
+print(n)
