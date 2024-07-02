@@ -1,0 +1,46 @@
+import sys
+
+def prim_mst(graph):
+    num_vertices = len(graph)
+    selected = [False] * num_vertices
+    mst_edges = []
+    parent = [-1] * num_vertices
+    key = [sys.maxsize] * num_vertices
+    key[0] = 0 
+    for _ in range(num_vertices):T
+        min_key = sys.maxsize
+        u = -1
+        
+        for v in range(num_vertices):
+            if not selected[v] and key[v] < min_key:
+                min_key = key[v]
+                u = v
+        
+    
+        selected[u] = True
+        
+        # Update key value and parent index of the adjacent vertices of the picked vertex
+        for v in range(num_vertices):
+            if graph[u][v] and not selected[v] and graph[u][v] < key[v]:
+                key[v] = graph[u][v]
+                parent[v] = u
+    
+    # Collect the MST edges
+    for i in range(1, num_vertices):
+        mst_edges.append((parent[i], i, graph[i][parent[i]]))
+    
+    return mst_edges
+
+# Example graph represented as an adjacency matrix
+graph = [
+    [0, 2, 0, 6, 0],
+    [2, 0, 3, 8, 5],
+    [0, 3, 0, 0, 7],
+    [6, 8, 0, 0, 9],
+    [0, 5, 7, 9, 0]
+]
+
+mst = prim_mst(graph)
+print("Edges in the Minimum Spanning Tree:")
+for edge in mst:
+    print(f"Edge {edge[0]} - {edge[1]} with weight {edge[2]}")
