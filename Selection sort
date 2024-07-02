@@ -1,0 +1,12 @@
+#Selection Sort
+n = [9,7,5,8,10,26,44,3,1]
+l = len(n)
+for i in range(0,l):
+    pos = i
+    mini = n[i]
+    for j in range(i,l):
+        if mini > n[j]:
+            mini = n[j]
+            pos = j
+            n[i],n[pos]=n[pos],n[i]
+print(n)
