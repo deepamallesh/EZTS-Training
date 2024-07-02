@@ -1,0 +1,35 @@
+items = []
+items1 = []
+def push(data):
+    items.append(data)
+    
+def pop():
+    exp = items.pop()
+        
+        
+c = 0
+exp = '(2x+3y[1+4v]+3)'
+for i in exp:
+    if i == '{' or i == '}' or i == '[' or i == ']' or i == '(' or i == ')':
+        push(i)
+
+l = len(items)+1
+for i in range(-1,-l,-1):
+    items1.append(items[i])
+
+for i in items:
+    el1 = items.pop()
+    el2 = items1.pop()
+    if el1 == ']' and el2 == '[':
+        c +=1
+    elif el1 == '}' and el2 == '{':
+        c +=1
+    elif el1 == ')' and el2 == '(':
+        c += 1
+    else:
+        pass
+        
+if c == len(items):
+    print("The expression is correct")
+else:
+    print("The expression not is correct")
