@@ -1,0 +1,29 @@
+#Quick sort
+
+def divide(L,low,high):
+    p = L[high]
+    pi = high
+    j= low-1
+    for i in range(low,high):
+        if L[i] <=p:
+            j+=1
+            L[i],L[j] =L[j],L[i]
+    print(low,high)
+    j+=1
+    L[j],L[pi]=L[pi],L[j]
+    pi=j
+    return pi
+
+def quicksort(L,low,high):
+    if low<high:
+        pi = divide(L,low,high)
+        quicksort(L,low,pi-1)
+        quicksort(L,pi+1,high)
+    return
+
+
+if _name_ == "_main_":
+    L = list(map(int,input().split()))
+    quicksort(L,0,len(L)-1)
+    
+    print("Sorted list = ",L)
